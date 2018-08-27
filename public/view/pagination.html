@@ -1,0 +1,20 @@
+<div class="h4" style="text-align: center;margin-top: 30px;margin-bottom: 5px;">
+    <i ng-show="$parent.page !== 1" class="fa fa-angle-double-left pagination-hover" style="cursor: pointer;"
+       ng-click="changePage(1)"></i>
+    <i ng-show="$parent.page !== 1" class="fa fa-angle-left pagination-hover" style="cursor: pointer;"
+       ng-click="changePage($parent.page - 1)"></i>
+    <span>
+        <span class="pagination-hover"
+              ng-repeat="x in $parent.profiles|limitTo:$parent.maxPages"
+              style="cursor: pointer;"
+              ng-click="changePage($index + 1)"
+              ng-style="{'color':$parent.page === $index + 1?'#a5a3a3':'black','text-decoration':$parent.page === $index + 1?'underline':'none'}">
+            {{$index + 1}}
+        </span>
+    </span>
+    <i ng-show="$parent.page !== $parent.maxPages" class="fa fa-angle-right pagination-hover" style="cursor: pointer;"
+       ng-click="changePage($parent.page + 1)"></i>
+    <i ng-show="$parent.page !== $parent.maxPages" class="fa fa-angle-double-right pagination-hover " style="cursor: pointer;"
+       ng-click="changePage($parent.maxPages)"></i>
+</div>
+

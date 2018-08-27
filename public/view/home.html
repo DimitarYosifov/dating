@@ -1,0 +1,85 @@
+<!--<navbar user="user"></navbar>-->
+
+<!--{{user}}-->
+<div style="display: flex;justify-content: space-between;">
+    <!--LATEST PROFILES-->
+    <div ng-show="!loading"
+         style="display: flex;flex-direction: column;justify-content: center;width: 15%;min-width: 200px;">
+        <p style="position: relative;
+           /*width:calc(100%/6);*/
+           font-weight: 800;
+           text-align: center;
+           font-size: 27px;
+           margin: 10px;">
+            Latest
+        </p>
+        <span ng-repeat="(key,value) in latestProfiles  track by $index" style="display: flex; border: 1px solid #888384;
+              flex-direction: column; height: 195px;margin: 10px;box-shadow: inset 0px 0px 70px 6px rgba(117, 116, 117, 0.57);"
+              class="profile-container" ng-click="profileSelected(value)">
+            <!--<a ui-sref="innerPersonalProfile({profileId:'{{value.uid}}'})" style="text-decoration: none">-->
+            <div style="text-align: center;">
+                <span class="" style="color:black">{{value.username}}</span>
+                <span class="" style="color:black">{{getAge(value.birthDate.year)}}</span>
+            </div>
+            <div>
+                <div ng-bind-html="getImage(value.profile_picture, value.gender)" style=" " class="profile-picture"></div>
+            </div>
+
+            <!--RATING STARS-->
+            <div style="text-align: center;">
+                <span ng-repeat="n in [1, 2, 3, 4, 5]">
+                    <img src="../images/rating-full.png" style="width: 20px;height: 20px;"
+                         ng-if="value.averageRating >= $index + 1">
+                    <img src="../images/rating-empty.png" style="width: 20px;height: 20px;"
+                         ng-if="value.averageRating < $index + 1">
+                </span>
+            </div>
+
+        </span>
+        <span style="margin: 30px; text-align: center;"><a ui-sref="allProfiles">See More...</a></span>
+    </div>
+
+
+    <!--HOTTEST PROFILES-->
+    <div ng-show="!loading"
+         style="display: flex;flex-direction: column;justify-content: center;width: 15%;min-width: 200px;">
+        <p style="position: relative;
+           /*width:calc(100%/6);*/
+           font-weight: 800;
+           text-align: center;
+           font-size: 27px;
+           margin: 10px;">
+            Hottest
+        </p>
+        <span ng-repeat="(key,value) in hottestProfiles | orderBy:'-averageRating' | limitTo:5" style="display: flex; border: 1px solid #888384;
+              flex-direction: column; height: 195px;margin: 10px;box-shadow: inset 0px 0px 70px 6px rgba(117, 116, 117, 0.57);"
+              class="profile-container" ng-click="profileSelected(value)">
+            <!--<a ui-sref="innerPersonalProfile({profileId:'{{value.uid}}'})" style="text-decoration: none">-->
+            <div style="text-align: center;">
+                <span class="" style="color:black">{{value.username}}</span>
+                <span class="" style="color:black">{{getAge(value.birthDate.year)}}</span>
+            </div>
+            <div>
+                <div ng-bind-html="getImage(value.profile_picture, value.gender)" style=" " class="profile-picture"></div>
+            </div>
+
+            <!--RATING STARS-->
+            <div style="text-align: center;">
+                <span ng-repeat="n in [1, 2, 3, 4, 5]">
+                    <img src="../images/rating-full.png" style="width: 20px;height: 20px;"
+                         ng-if="value.averageRating >= $index + 1">
+                    <img src="../images/rating-empty.png" style="width: 20px;height: 20px;"
+                         ng-if="value.averageRating < $index + 1">
+                </span>
+            </div>
+
+        </span>
+        <span style="margin: 30px; text-align: center;"><a ui-sref="hottest">See More...</a></span>
+    </div>
+</div>
+
+
+
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" alt="" style="width: 50px;position: relative;top: 30vh;">
+</div>

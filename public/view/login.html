@@ -1,0 +1,38 @@
+<!--<navbar user="user"></navbar>-->
+
+<div id="input-form" class="jumbotron modal-dialog ng-scope well" ng-hide="loginInfo">
+    <div style="text-align: right;">
+        <input type="checkbox" id="hacky-input-login" ng-click="getRandomImage()" ng-init="getRandomImage()">
+        <label for="hacky-input-login">
+            <i id="toggle-login-girl" class="fa fa-angle-up" aria-hidden="true" style="font-size: 30px;"
+               data-toggle="collapse" data-target="#dancing-girl-login"></i>
+        </label>
+    </div>
+    <div style="text-align: center;" id="dancing-girl-login" class="collapse">
+        <img ng-src="{{randomImage}}" style="width: 140px;position: relative;">
+    </div>
+    <form ng-submit="loginUser()">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email" ng-required="true" ng-model="loginEmail">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" ng-required="true" id="pwd" ng-model="loginPassword">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+    </form>
+</div>
+
+<div style="text-align: center;height: 70vh;" ng-show="loginInfo">
+    <div id="info-div" style="black: red;text-align: center;font-size: 30px;position: relative;top: 30vh;">
+        {{loginInfo}}
+    </div>
+</div>
+
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>

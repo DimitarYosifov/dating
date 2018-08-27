@@ -1,0 +1,77 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" style="position:relative;" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+
+                <li><span style="" ng-if="img" ng-bind-html="getImage(img, gender)"  class="navbar-picture col-1"></span></li>
+
+                <!--<h3 style="float: right;margin-top: 13px;margin-right: 20px;color: #e4d9d9;" ng-show="username">welcome, {{username}}</h3>--> 
+
+                <li ui-sref="profile" ng-if="user"><a href="" class="nav-link col-1">My Profile</a></li>
+                <li ui-sref="home"><a href="" class="nav-link col-1">Home</a></li>
+                <li ui-sref="allProfiles" ng-if="user" style="outline: none;"><a href="" class="nav-link col-1">Search</a></li>
+                <li ui-sref="hottest" ng-if="user" style="outline: none;"><a href="" class="nav-link col-1">Hottest</a></li>
+                <li ui-sref="login" ng-if="!user"><a href="" class="nav-link col-1">Login</a></li>
+                <li ui-sref="register" ng-if="!user"><a href="" class="nav-link col-1">Register</a></li>
+                <li ng-click="" ng-if="user" style="outline: none;"><a href="" class="nav-link col-1" data-toggle="modal" data-target="#myModal">Logout</a>
+                <li ui-sref="dirtyJokes" ><a href="" style="" class="nav-link col-1">Dirty jokes</a></li>
+                <li ui-sref="statistics"><a href="" style="" class="nav-link col-1">Statistics</a></li>
+                <!--<li ><a href="https://dimitaryosifov.github.io/project-void/" target="blank" style="" class="nav-link">Project Void</a></li>-->
+
+
+
+
+
+
+
+
+
+<!--
+                <li class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown"
+                            style="outline: none;padding: 13px;
+                            font-size: 15px;">More
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="dirtyJokes" style="color: #959090;background: white;">Dirty jokes</a></li>
+                        <li><a ui-sref="statistics" style="color: #959090;background: white;">Statistics</a></li>
+                        <li><a href="https://dimitaryosifov.github.io/project-void/" target="blank" style="color: #959090;background: white;"> Project Void</a></li>
+                    </ul>
+                </li>-->
+
+            </ul>
+
+        </div>
+        <div style="position: absolute;right: 10px;font-weight: normal;margin-top: 0px;color: #585757;">
+            {{currentTime}}
+        </div>
+    </div>
+</nav>
+
+
+<!--LOGOUT MODAL-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <p>confirm logout</p>
+                <div style="text-align: center;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="signOutUser()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

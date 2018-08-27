@@ -1,0 +1,132 @@
+<!--<navbar user="user"></navbar>-->
+<unauthorized authorized="authorized" ng-if="!authorized && !loading"></unauthorized >
+
+
+<div ng-if="!loading && authorized" style="margin-top: 30px;">
+
+
+    <div style="margin-bottom: 10px;display: flex;justify-content: space-between;align-items: center;">
+        <h3 class="form-group col-lg-6">Highest rated profiles</h3>
+
+
+        <div class="topnav" style="border: 1px solid #ddd;border-radius: 7px;padding: 6px;">
+            <div class="search-container">
+                <form >
+                    <input ng-model="searchUser" style="outline: none;border: none;" type="text" placeholder="Search by name" name="search">
+                    <button style=" cursor: default;border-radius: 50%;border: none;"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+
+        <!--        <div>
+                    <input>
+                    <span><i class="fas fa-search"></i></span>
+                </div>-->
+
+    </div>
+
+
+    <table class="table table-hover table-responsive">
+        <tr>
+            <th>#</th>
+            <th class="table-header-hottest" ng-click="sort('username')">
+
+                <span class="sort-icons-container">
+                    <i class="fa fa-sort-up sort-icons" ng-show="orderedBy === '-username'"></i>
+                    <i class="fa fa-sort-down sort-icons" ng-show="orderedBy === 'username'"></i>
+                </span>
+                <span>
+                    name
+                </span>
+            </th>
+            <th class="table-header-hottest" ng-click="sort('age')">
+                <span class="sort-icons-container">
+                    <i class="fa fa-sort-up sort-icons" ng-show="orderedBy === '-age'"></i>
+                    <i class="fa fa-sort-down sort-icons" ng-show="orderedBy === 'age'"></i>
+                </span>
+                <span>
+                    age
+                </span>
+            </th>
+            <th class="table-header-hottest" ng-click="sort('gender')">
+                <span class="sort-icons-container">
+                    <i class="fa fa-sort-up sort-icons" ng-show="orderedBy === '-gender'"></i>
+                    <i class="fa fa-sort-down sort-icons" ng-show="orderedBy === 'gender'"></i>
+                </span>
+                <span>
+                    gender
+                </span>
+            </th>
+            <th></th>
+            <th class="table-header-hottest" ng-click="sort('averageRating')">
+                <span class="sort-icons-container">
+                    <i class="fa fa-sort-up sort-icons" ng-show="orderedBy === 'averageRating'"></i>
+                    <i class="fa fa-sort-down sort-icons" ng-show="orderedBy === '-averageRating'"></i>
+                </span>
+                <span>
+                    rating
+                </span>
+            </th>
+        </tr>
+        <tr ng-repeat="profile in profiles|filtedByUserSearch:searchUser  | orderBy:orderedBy |limitTo:10:page*10-10   track by $index" ng-click="profileSelected(profile)"  style="cursor: pointer">
+            <td>{{$index + 1 + page * 10 - 10}}</td>
+            <td >{{profile.username}}</td>
+            <td>{{profile.age}}</td>
+            <td><i class="fa {{profile.gender==='Male'?'fa-mars' :profile.gender==='Female'?'fa-venus':'fa-genderless'}}"></i></td>
+            <td> <span ng-repeat="n in [1, 2, 3, 4, 5]">
+                    <img src="../images/rating-full.png" style="width: 20px;height: 20px;"
+                         ng-if="profile.averageRating >= $index + 1">
+                    <img src="../images/rating-empty.png" style="width: 20px;height: 20px;"
+                         ng-if="profile.averageRating < $index + 1">
+                </span></td>   
+            <td>{{profile.averageRating| number : 2}}</td>
+        </tr>
+    </table>
+
+    <h3 ng-show="profiles.length === 0">no matches found</h3>
+
+
+
+    <!--{{profiles|filtedByUserRearch:searchUser : true}}-->
+
+
+
+<!--    <div class="h4" style="text-align: center;margin-top: 30px;margin-bottom: 5px;">
+        <i ng-show="page !== 1" class="fa fa-angle-double-left pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(1)"></i>
+        <i ng-show="page !== 1" class="fa fa-angle-left pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(page - 1)"></i>
+        <span>
+            <span class="pagination-hover"
+                  ng-repeat="x in profiles|limitTo:maxPages"
+                  style="cursor: pointer;"
+                  ng-click="changePage($index + 1)"
+                  ng-style="{'color':page === $index + 1?'#a5a3a3':'black','text-decoration':page === $index + 1?'underline':'none'}">
+                {{$index + 1}}
+            </span>
+        </span>
+        <i ng-show="page !== maxPages" class="fa fa-angle-right pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(page + 1)"></i>
+        <i ng-show="page !== maxPages" class="fa fa-angle-double-right pagination-hover " style="cursor: pointer;"
+           ng-click="changePage(maxPages)"></i>
+    </div>-->
+
+<pagination
+    page="page"
+    max-pages="mazPages"
+    change-page="changePage"
+    >
+        
+</pagination>
+
+
+</div>
+
+
+
+
+
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>

@@ -1,0 +1,198 @@
+<unauthorized authorized="authorized" ng-if="!authorized && !loading"></unauthorized >
+
+
+
+<div style="display: flex;
+    justify-content: center;
+    flex-wrap: wrap;"    ng-show="me && !loading">
+
+   
+    <div style="justify-content: center; height: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    flex-direction: column;">
+        <img src="images/peta-ad.jpg" style="width: 200px;height: 300px;
+             margin: 30px;" class="modal-content img-thumbnail" >
+        <img src="images/beer.jpg" style="width: 200px;height: 300px;
+             margin: 30px;" class="modal-content img-thumbnail">
+    </div>
+
+    <div id="input-form" class="jumbotron modal-dialog ng-scope well" >
+        <!--    <div style="text-align: right;">
+                <input type="checkbox" id="hacky-input-login" ng-click="getRandomImage()" ng-init="getRandomImage()">
+                <label for="hacky-input-login">
+                    <i id="toggle-login-girl" class="fa fa-angle-up" aria-hidden="true" style="font-size: 30px;"
+                       data-toggle="collapse" data-target="#dancing-girl-login"></i>
+                </label>
+            </div>-->
+        <!--    <div style="text-align: center;" id="dancing-girl-login" class="collapse">
+                <img ng-src="{{randomImage}}" style="width: 140px;position: relative;">
+            </div>-->
+
+
+
+        <form   ng-style="{'pointer-events':edit?'auto':'none'}">   
+            <i class="far fa-edit" style="float: right;cursor: pointer; pointer-events: auto !important;" ng-click="edit = !edit"></i>
+
+
+            <div class="form-group">
+                <label for="profile-name">Name</label>
+                <input type="text" class="form-control" id="profile-name" ng-required="true" ng-model="me.username" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label for="profile-gender">Gender</label>
+                <input ng-show="!edit" type="text" class="form-control" id="profile-gender" ng-required="true" ng-model="me.gender" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+
+
+                <select ng-show="edit" id="gender" class="form-control" ng-model="me.gender" style="">
+                    <option ng-selected="me.gender === 'Male'">Male</option>
+                    <option ng-selected="me.gender === 'Female'">Female</option>
+                    <option ng-selected="me.gender === 'Couple'">Couple</option>
+                    <option style="display: none;"></option>
+                </select>
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="form-group">
+                <label for="profile-looking-for">Looking For</label>
+                <input type="text" class="form-control" id="looking-for" ng-required="true" ng-model="me.lookingFor" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="profile-location-country">Country</label>
+                <input ng-show="!edit" type="text" class="form-control" ng-required="true" id="profile-location-country" ng-model="me.country" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+                <select ng-show="edit" id="country" class="form-control" ng-model="me.country" style="">
+                    <option ng-repeat="country in countries">{{country}}</option>
+                    <option style="display: none;"></option>
+                </select>
+            </div>
+
+
+
+
+            <div class="form-group" ng-show="me.country === 'Bulgaria'">
+                <label for="profile-location-city">City</label>
+                <input ng-show="!edit" type="text" class="form-control" ng-required="true" id="profile-location-city" ng-model="me.city"  ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+
+                <select ng-show="edit" id="city" class="form-control" ng-model="me.city" style="">
+                    <option ng-repeat="city in cities">{{city}}</option>
+                    <option style="display: none;"></option>
+                </select>
+
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="profile-email">Email</label>
+                <input type="email" class="form-control" ng-required="true" id="profile-email" ng-model="me.email" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+            </div>
+            <div class="form-group">
+                <label for="profile-phone">Phone Number</label>
+                <input type="text" class="form-control" ng-required="false" id="profile-phone" ng-model="me.phone" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+            </div>
+
+
+            <div class="form-group"
+                 style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+                <label for="about-profile" style="display: flex;align-self: center;">Description</label>
+                <textarea class="form-control" ng-required="false" id="about-profile" ng-model="me.description"
+                          style="min-height: 200px;max-width: 40%;min-width: 40%;" ng-style="{'background':edit?'#ffffff':'#eae4e4'}"></textarea>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <label for="pass">Change password</label>
+                <input type="checkbox" id="pass" name="newPassword" value="pass" ng-model="pass"> <br>
+            </div>
+
+
+
+
+            <div class="form-group" ng-show="edit && pass">
+                <label for="profile-password-new">New Password:</label>
+                <input type="password" class="form-control" ng-required="edit==true" id="profile-password-new" ng-model="newPassword" ng-style="{'background':edit?'#ffffff':'#eae4e4'}">
+            </div>
+
+
+
+
+
+
+            <button ng-click="editUser()"  class="btn btn-default" ng-show="edit">Save Changes</button>
+
+
+
+
+
+
+        </form>
+
+
+    </div>
+
+<!--    <div>
+        <img src="images/peta-ad.jpg" style="width: 200px;
+             margin: 30px;" class="modal-content">
+    </div>-->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>
+
+
+
+
+

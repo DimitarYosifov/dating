@@ -1,0 +1,162 @@
+<!--<navbar user="user"></navbar>-->
+
+<div id="input-form" class="jumbotron modal-dialog ng-scope well" ng-hide="regInfo" style="opacity:0.98;">
+    <form ng-submit="registerUser()">
+
+
+        <div style="text-align: right;">
+            <input type="checkbox" id="hacky-input-register" ng-click="getRandomImage()" ng-init="getRandomImage()">
+            <label for="hacky-input-register">
+                <i id="toggle-register-girl" class="fa fa-angle-up" aria-hidden="true" style="font-size: 30px;" data-toggle="collapse" data-target="#dancing-girl-register"></i>
+            </label>
+        </div>
+        <div style="text-align: center;" id="dancing-girl-register" class="collapse">
+            <img ng-src="{{randomImage}}" style="width: 140px;position: relative;">
+        </div>
+
+
+        <!--NICKNAME-->
+        <div class="form-group">
+            <label for="nickNmae">Nick name:</label><span style="float: right;color: red;">*</span>
+            <input type="text" class="form-control" id="nickNmae" ng-required="true" ng-model="registerNickName">
+        </div>
+
+        <!--EMAIL-->
+        <div class="form-group">
+            <label for="email">Email address:</label><span style="float: right;color: red;">*</span>
+            <input type="email" class="form-control" id="email" ng-required="true" ng-model="registerEmail">
+        </div>
+
+        <!--PASSWORD-->
+        <div class="form-group">
+            <label for="pwd">Password:</label><span style="float: right;color: red;">*</span>
+            <input type="password" class="form-control" ng-required="true" id="pwd" ng-model="registerPassword">
+        </div>
+
+        <!--CONFIRM PASSWORD-->
+        <div class="form-group">
+            <label for="confirm-pwd">Confirm Password:</label><span style="float: right;color: red;">*</span>
+            <input type="password" class="form-control" ng-required="true" id="confirm-pwd"
+                   ng-model="registerConfirmPassword">
+        </div>
+
+        <!--PICTURE-->
+        <div class="" style="position: relative;display: flex;">
+            <input style="opacity: 0; width: 0px; z-index: 111" id="inputFileToLoad" type="file"
+                   mg-model="file"
+                   onchange="angular.element(this).scope().encodeImageFileAsURL()"/>
+            <span
+                    ng-model="profilePicture.message"
+                    style="z-index: 11;display: flex;justify-content: flex-end;width: 100%;">{{profilePicture.message}}
+                <i ng-class="profilePicture.message?'':'fa fa-check'"></i>
+            </span>
+            <div class="badge" style="position:absolute;padding: 5px 10px; cursor:pointer;">Upload Picture</div>
+        </div>
+        <div id="profile-pic"></div>
+
+        <!--GENDER-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="gender" style="display: flex;align-self: center;">Select Gender:</label>
+            <select id="gender" class="form-control" ng-model="registerGender" style="width: 40%;">
+                <option ng-selected="true">Male</option>
+                <option>Female</option>
+                <option>Couple</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--LOOKING FOR-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="partner-gender" style="display: flex;align-self: center;">Looking For:</label>
+            <select id="partner-gender" class="form-control" ng-model="registerPartnerGender" style="width: 40%;">
+                <option ng-selected="true">Female</option>
+                <option>Male</option>
+                <option>Couple</option>
+                <option>Doesn't Matter</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--COUNTRY-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="country" style="display: flex;align-self: center;">Country:</label>
+            <select id="country" class="form-control" ng-model="country" style="width: 40%;">
+                <option ng-repeat="country in countries">{{country}}</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--CITY-->
+        <div class="form-group" ng-if="country==='Bulgaria'"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="city" style="display: flex;align-self: center;">City:</label>
+            <select id="city" class="form-control" ng-model="city" style="width: 40%;">
+                <option ng-repeat="city in cities">{{city}}</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--DESCRIPTION-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="about-profile" style="display: flex;align-self: center;">About You:</label>
+            <textarea class="form-control" ng-required="false" id="about-profile" ng-model="registerAbout"
+                      style="min-height: 200px;max-width: 40%;min-width: 40%;"></textarea>
+        </div>
+
+        <!--PHONE NUMBER-->
+        <div class="form-group" style="display: flex;justify-content: space-between;align-items: center;">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control" id="phone" ng-required="false" ng-model="phone" style="width: 40%">
+        </div>
+
+        <!--BIRTH DATE-->
+        <div class="form-group" id="birth-date-container"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="day" style="display: flex;align-self: center;">Birth Date:</label>
+            <div style="display: flex;">
+                <select id="day" class="form-control" ng-model="day" style="width: fit-content;">
+                    <option ng-repeat="day in days">{{day}}</option>
+                    <option style="display: none;"></option>
+                </select>
+                <!--<label for="month" style="display: flex;align-self: center;"></label>-->
+                <select id="month" class="form-control" ng-model="month" style="width: fit-content;">
+                    <option ng-repeat="month in months">{{month}}</option>
+                    <option style="display: none;"></option>
+                </select>
+                <!--<label for="year" style="display: flex;align-self: center;"></label>-->
+                <select id="year" class="form-control" ng-model="year" style="width: fit-content;">
+                    <option ng-repeat="year in years">{{year}}</option>
+                    <option style="display: none;"></option>
+                </select>
+            </div>
+        </div>
+
+
+        <!--REMEMBER USER DATA                                           TODO TO USE LOCALSTORAGE TO STORE DATA-->
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-default">Register</button>
+        <span style="float: right;color: red; font-size: 12px">* Required</span>
+    </form>
+</div>
+
+<div style="text-align: center;height: 70vh;" ng-show="regInfo">
+    <div id="info-div" style="black: red;text-align: center;font-size: 30px;position: relative;top: 30vh;">{{regInfo}}
+    </div>
+</div>
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>
+
+
+
+
+

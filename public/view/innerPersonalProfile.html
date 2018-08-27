@@ -1,0 +1,63 @@
+<!--<navbar user="user"></navbar>-->
+<unauthorized authorized="authorized" ng-show="!authorized&&!loading"></unauthorized >
+
+<div style="justify-content: center;display: flex;" ng-show="!loading&&authorized">
+    <div style="display: flex; flex-wrap: wrap;width: 70%;border: 1px solid #d9d8d8;background: #f5f5f5;" class="bottom breadcrumb">
+        <div style="display: flex;width: 100%;align-items: center;justify-content: space-between;min-height: 50px;padding: 5px;" class="panel panel-default ">
+            <h3 style="margin: 0px;padding-left: 10px;">{{profile.username}}</h3>
+            <!--RATING STARS-->
+            <span style="">
+                <span style="display: flex;flex-direction: column;" ng-show="profile.averageRating" ng-model="profile.rating">
+                    Rating: {{profile.averageRating | number : 2}} from {{profile.votes}} vote(s)
+                </span>
+                <span style="display: flex; justify-content: flex-end;">
+                     <span ng-repeat="n in [1,2,3,4,5]">
+                        <img src="../images/rating-full.png" style="width: 20px;height: 20px; margin: 0px 2px;" ng-if="profile.averageRating>=$index+1" >
+                        <img src="../images/rating-empty.png" style="width: 20px;height: 20px; margin: 0px 2px;" ng-if="profile.averageRating<$index+1">
+                     </span>
+                </span>
+            </span>
+        </div>
+
+        <div style="display: flex;justify-content: space-between;width: 100%;">
+            <div ng-bind-html="getImage(profile.profile_picture,profile.gender)"
+                 style="width: 200px;display: flex;align-items: center; " class="selected-profile-picture"></div>
+            <div style="display: flex;align-items: center;">
+                <div>
+                    <div>{{profile.gender}} looking for {{profile.lookingFor}}</div>
+                    <div>Registered: {{profile.timestamp| date: 'dd-MM-yyyy hh:mm:ss'}}</div>
+                    <div>location:<span>{{profile.city}}<span>&nbsp;{{profile.country}}</span></span></div>
+                    <div>Email: {{profile.email}}</div>
+                    <div>Phone Number: {{profile.phone}}</div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;">
+            <div style="padding: 20px;">Description: {{profile.description}}</div>
+        </div>
+
+        <div style="width: 100%;margin-bottom: 10px;" ng-if="!visitingOwnProfile">
+            <button data-toggle="collapse" data-target="#rate"   class="btn btn-info ">Rate this person</button>
+
+        </div>
+
+        <div id="rate" class="collapse" >
+           <span style="display: flex;" ng-mouseout="clearStars()" ng-show="!alreadyRated">
+                        <img ng-src="{{starSrc[0]}}" style="width: 28px;height: 28px; padding: 0px 2px; cursor: pointer;" ng-mouseover="rateHover(0)" ng-click="rateComplete(1)">
+                        <img ng-src="{{starSrc[1]}}" style="width: 28px;height: 28px; padding: 0px 2px; cursor: pointer;" ng-mouseover="rateHover(1)" ng-click="rateComplete(2)">
+                        <img ng-src="{{starSrc[2]}}" style="width: 28px;height: 28px; padding: 0px 2px; cursor: pointer;" ng-mouseover="rateHover(2)" ng-click="rateComplete(3)">
+                        <img ng-src="{{starSrc[3]}}" style="width: 28px;height: 28px; padding: 0px 2px; cursor: pointer;" ng-mouseover="rateHover(3)" ng-click="rateComplete(4)">
+                        <img ng-src="{{starSrc[4]}}" style="width: 28px;height: 28px; padding: 0px 2px; cursor: pointer;" ng-mouseover="rateHover(4)" ng-click="rateComplete(5)">
+
+                        <!--<img src="../images/rating-empty.png" style="width: 20px;height: 20px; margin: 0px 2px;">-->
+           </span>
+            <span  ng-show="alreadyRated" style="">Already rated this profile</span>
+            <button  ng-show="alreadyRated" class="btn" ng-click="alreadyRated=false">Change rating</button>
+        </div>
+
+    </div>
+
+</div>
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>

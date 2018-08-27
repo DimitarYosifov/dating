@@ -1,0 +1,120 @@
+<!--<navbar user="user"></navbar>-->
+<unauthorized authorized="authorized" ng-if="!authorized && !loading"></unauthorized >
+
+
+<div id="input-form" class="jumbotron modal-dialog ng-scope well" ng-hide="loginInfo || !authorized">
+    <form ng-submit="search()">
+        <!--Gender-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="gender" style="display: flex;align-self: center;">I am:</label>
+            <select id="gender" class="form-control" ng-model="gender" style="width: 40%;">
+                <option>Male</option>
+                <option ng-selected="true">Female</option>
+                <option >Couple</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--Looking for-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="partnerGender" style="display: flex;align-self: center;">Looking For:</label>
+            <select id="partnerGender" class="form-control" ng-model="partnerGender" style="width: 40%;">
+                <option ng-selected="true">Male</option>
+                <option>Female</option>
+                <option>Couple</option>
+                <option>Doesn't Matter</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <!--Age-->
+        <div class="form-group" id="age-container"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="start" style="display: flex;align-self: center;">Between:</label>
+            <div style="display: flex; width: 40%;justify-content: space-between;">
+                <select id="start" class="form-control" ng-model="start" style="width: fit-content;">
+                    <option ng-repeat="start in minAge">{{start}}</option>
+                    <option style="display: none;"></option>
+                </select>
+                <span style="display: flex;align-self: center;">and</span>
+                <select id="end" class="form-control" ng-model="end" style="width: fit-content;">
+                    <option ng-repeat="end in maxAge">{{end}}</option>
+                    <option style="display: none;"></option>
+                </select>
+            </div>
+        </div>
+
+        <!--COUNTRY-->
+        <div class="form-group"
+             style="margin-top: 5px; display: flex;flex-direction: row;justify-content: space-between;">
+            <label for="country" style="display: flex;align-self: center;">From:</label>
+            <select id="country" class="form-control" ng-model="country" style="width: 40%;">
+                <option ng-repeat="country in countries">{{country}}</option>
+                <option style="display: none;"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+</div>
+
+<div ng-if="!loading" style="justify-content: center;display: flex;">
+    <div style="display: flex;flex-direction: row;justify-content: center;width: 80%; flex-wrap: wrap;">
+        <span ng-repeat="(key,value) in profiles |limitTo:10:page*10-10 track by $index" style="display: flex; border: 1px solid #888384;
+              flex-direction: column; height: 195px;margin: 10px;box-shadow: inset 0px 0px 70px 6px rgba(117, 116, 117, 0.57);"
+              id="profile-container"  ng-click="profileSelected(value)" class="profile-container">
+            <!--<a ui-sref="innerPersonalProfile({profileId:'{{value.uid}}'})" style="text-decoration: none">-->
+            <div style="text-align: center;">
+                <span class="" style="color:black">{{value.username}}</span>
+                <span class="" style="color:black">{{getAge(value.birthDate.year)}}</span>
+            </div>
+            <div style="min-width: 200px">
+                <div ng-bind-html="getImage(value.profile_picture, value.gender)" style=" " class="profile-picture"></div>
+            </div>
+            </a>
+        </span>
+    </div>
+
+   
+
+</div>
+
+
+<pagination
+    page="page"
+    max-pages="mazPages"
+    change-page="changePage"
+    >
+        
+</pagination>
+
+
+<!-- <div class="h4" style="text-align: center;margin-top: 30px;margin-bottom: 5px;">
+        <i ng-show="page !== 1" class="fa fa-angle-double-left pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(1)"></i>
+        <i ng-show="page !== 1" class="fa fa-angle-left pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(page - 1)"></i>
+        <span>
+            <span class="pagination-hover"
+                  ng-repeat="x in profiles|limitTo:maxPages"
+                  style="cursor: pointer;"
+                  ng-click="changePage($index + 1)"
+                  ng-style="{'color':page === $index + 1?'#a5a3a3':'black','text-decoration':page === $index + 1?'underline':'none'}">
+                {{$index + 1}}
+            </span>
+        </span>
+        <i ng-show="page !== maxPages" class="fa fa-angle-right pagination-hover" style="cursor: pointer;"
+           ng-click="changePage(page + 1)"></i>
+        <i ng-show="page !== maxPages" class="fa fa-angle-double-right pagination-hover " style="cursor: pointer;"
+           ng-click="changePage(maxPages)"></i>
+    </div>-->
+
+
+<!--<div ng-repeat="x in profiles" ng-model="profiles">{{x.username}}</div>-->
+
+
+<div style="text-align: center;height: 70vh;" ng-show="loading">
+    <img src="images/loading.gif" style="width: 50px;position: relative;top: 30vh;">
+</div>

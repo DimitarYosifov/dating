@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app='App' ng-controller="mainController">
+    <head>
+        
+        
+        
+        <!--<script>console.log(44);</script>-->
+        
+        <base href="/public">
+
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=egde"/>
+        <title>AngularJS App</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- LIBRARIES -->
+        <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+
+        <!--<script src="https://code.angularjs.org/1.5.0/angular.min.js"></script>-->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+
+
+
+
+
+        <script src="https://code.angularjs.org/1.5.0/angular-route.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.0/angular-resource.min.js"></script>
+
+        <script src="https://code.angularjs.org/1.5.0/angular-sanitize.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+        <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <script src="App.js"></script>
+        <!-- STYLE / THEME -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+
+
+        <link href="//cdncatalog.com/assets/flat-ui/css/flat-ui.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet">
+
+
+        <!-- THIS APP. -->
+
+
+
+        <script src="directives/navbar.js"></script>
+        <script src="directives/unauthorized.js"></script>
+        <script src="directives/pagination.js"></script>
+
+
+
+
+        <script src="services/userService.js"></script>
+        <script src="services/randomImageService.js"></script>
+
+
+        <script src="controller/services.js"></script>
+        <!--<script src="controller/directives.js"></script>-->
+        <!--<script src="controller/filters.js"></script>-->
+        <!--<script src="controller/controllers.js"></script>-->
+
+
+
+
+        <script src="controllers/mainController.js"></script>
+        <script src="controllers/homeController.js"></script>
+        <script src="controllers/loginController.js"></script>
+        <script src="controllers/registerController.js"></script>
+        <script src="controllers/profileController.js"></script>
+        <script src="controllers/allProfilesController.js"></script>
+        <script src="controllers/innerPersonalProfileController.js"></script>
+        <script src="controllers/dirtyJokesController.js"></script>
+        <script src="controllers/hottestProfilesController.js"></script>
+        <script src="controllers/statisticsController.js"></script>
+
+        <script src="App.js"></script>
+
+
+    </head>
+
+    <body class="container" >
+
+
+
+
+        <!--<navbar user="user"></navbar>-->
+
+
+
+        <!--<div class="container-fluid">-->
+        <!--<div class="row-fluid">-->
+        <!--<div class="col-sm-2">-->
+
+        <!--</div>&lt;!&ndash;/span&ndash;&gt;-->
+        <!--<div class="col-sm-12">-->
+        <!--<div class="jumbotron">-->
+        <!--<h1>Web App MVC Template</h1>-->
+        <!--<p>This is a web application starter template built with AngularJS with an MVC structure</p>-->
+        <!--</div>-->
+
+
+        <!--&lt;!&ndash;<div class="row-fluid" ng-view>&lt;!&ndash; VIEWS &ndash;&gt;</div>&ndash;&gt;-->
+
+        <!--</div>&lt;!&ndash;/span&ndash;&gt;-->
+        <!--</div>&lt;!&ndash;/row&ndash;&gt;-->
+
+        <!--</div>&lt;!&ndash;/.fluid-container&ndash;&gt;-->
+
+    <navbar user="user"></navbar>
+
+    <div ui-view="" id="ui-view"></div>
+
+
+</body>
+</html>
+
+
+
+<!--RUN LOCAL SERVER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--$ npm install -g local-web-server-->
+<!--$ cd <your-app-folder>-->
+<!--$ ws-->
+<!--Also, you can run-->
+<!--$ ws -p 8181-->
+<!-- -p defines the port you want to use-->
+<!--After that, just go to your browser and access http:localhost:8181/-->
